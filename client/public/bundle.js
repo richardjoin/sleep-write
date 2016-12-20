@@ -86,6 +86,7 @@
 	          { to: '/hello1' },
 	          'Hello1'
 	        ),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/hello2' },

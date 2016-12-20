@@ -6,7 +6,7 @@ class App extends Component {
   render(){
     return(
       <div>
-        <Link to='/hello1'>Hello1</Link>
+        <Link to='/hello1'>Hello1</Link><br/>
         <Link to='/hello2'>Hello2</Link>
       </div>
     )
