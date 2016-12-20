@@ -20,8 +20,8 @@ module.exports = function (app) {
   app.get('/posts', function (req,res) {
     // exec执行
     // find找
-    Post.find().exec(function (req,post) {
-      res.json({post})
+    Post.find().exec(function (req,posts) {
+      res.json({posts})
     })
   })
 

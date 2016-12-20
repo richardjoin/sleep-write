@@ -35,7 +35,7 @@ db.once('open',function () {
 // 在routes中。badyParser能够用
 routes(app)
 
-app.listen(3000, function () {
+app.listen(4000, function () {
   console.log(__dirname);
-  console.log('running on port 3000...');
+  console.log('running on port 4000...');
 })
