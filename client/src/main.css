@@ -23,7 +23,7 @@
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }
 .post-card a{
-  display: block;
+  color: #00bcd4;
   text-decoration: none;
   text-align: center;
 }
@@ -114,7 +114,7 @@ button:focus {
    text-decoration: none;
    border-radius: 20px;
  }
- 
+
 /* Post.js */
 
 .post-wrapper {

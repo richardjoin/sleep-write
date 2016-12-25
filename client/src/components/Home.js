@@ -18,12 +18,16 @@ class Home extends Component {
     let postList= this.state.data.map( (item,i) => (
       <div key={i} className='post-card'>
         <Link to={`/posts/${item._id}`}>{item.title}</Link>
+        <div style={{float:'right'}}>
+          <Link to={`/edit/${item._id}`}>修改</Link>
+          <Link to={`/`}>删除</Link>
+        </div>
       </div>
     ) )
     return(
       <div>
-      <Link className='new-post' to='/new' >click</Link>
         {postList}
+        <Link className='new-post' to='/new' >click</Link>
       </div>
     )
   }

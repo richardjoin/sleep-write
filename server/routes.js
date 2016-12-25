@@ -30,13 +30,17 @@ module.exports = function (app) {
   })
 
   app.get('/posts/:id', function(req, res){
-    Post.findById( req.params.id, function (err,post) {
+    Post.findById(req.params.id, function (err,post) {
       res.json({post: post})
     })
   })
 
    app.put('/posts/:id', function(req, res){
-     res.send('update a post!');
+     Post.findOneAndUpdate({_id:req.params.id},req.body, function (err) {
+       if (err) res.status(500).json({error:'更新失败'})
+      //  console.log('update a post!');
+      res.send('update succes!');
+     })
    })
 
    app.delete('/posts/:id', function(req, res){

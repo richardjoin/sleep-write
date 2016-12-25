@@ -21545,6 +21545,10 @@
 
 	var _New2 = _interopRequireDefault(_New);
 
+	var _Edit = __webpack_require__(268);
+
+	var _Edit2 = _interopRequireDefault(_Edit);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var renderRoutes = function renderRoutes() {
@@ -21555,8 +21559,9 @@
 	      _reactRouter.Route,
 	      { path: '/', component: _App2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'posts/:_id', component: _Hello2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/new', component: _New2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/posts/:_id', component: _Hello2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/new', component: _New2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/edit/:_id', component: _Edit2.default })
 	    )
 	  );
 	};
@@ -26875,18 +26880,32 @@
 	            _reactRouter.Link,
 	            { to: '/posts/' + item._id },
 	            item.title
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: { float: 'right' } },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/edit/' + item._id },
+	              '\u4FEE\u6539'
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/' },
+	              '\u5220\u9664'
+	            )
 	          )
 	        );
 	      });
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        postList,
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { className: 'new-post', to: '/new' },
 	          'click'
-	        ),
-	        postList
+	        )
 	      );
 	    }
 	  }]);
@@ -28438,7 +28457,12 @@
 	  function New() {
 	    _classCallCheck(this, New);
 
-	    return _possibleConstructorReturn(this, (New.__proto__ || Object.getPrototypeOf(New)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (New.__proto__ || Object.getPrototypeOf(New)).call(this));
+
+	    _this.state = {
+	      work: false
+	    };
+	    return _this;
 	  }
 
 	  _createClass(New, [{
@@ -28447,6 +28471,7 @@
 	      var _this2 = this;
 
 	      e.preventDefault();
+	      this.setState({ work: true });
 	      var title = this.refs.title.value;
 	      var content = this.refs.content.value;
 	      // console.log({title,content});
@@ -28455,13 +28480,20 @@
 	        content: content
 	      };
 	      _axios2.default.post('http://localhost:4000/posts', data).then(function (res) {
-	        return _this2.context.router.push('/');
+	        return _this2.props.router.push('/');
 	      });
 	      // .catch( (error) => console.log(error))
+	      // 跳转页面方法5种
+	      // Link
+	      // HASHHISTORY
+	      // BROWSERHISTORY
+	      // THIS.props
+	      // this.context.router
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'form-wrapper' },
@@ -28495,7 +28527,7 @@
 	            { className: 'actions' },
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'submit', className: 'button', key: '2' },
+	              { type: 'submit', className: 'button', key: '2', disabled: this.state.work },
 	              'save'
 	            ),
 	            _react2.default.createElement(
@@ -28553,7 +28585,7 @@
 
 
 	// module
-	exports.push([module.id, "*{\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n.header{\n  width: 100%;\n  height: 80%;\n  text-align: center;\n  background-color: #00bcd4;\n  line-height: 80px;\n  font-size: 1.8em;\n}\n.header a{\n  text-decoration: none;\n  color: #fff;\n}\n.post-card{\n  width: 100%;\n  max-width: 600px;\n  margin: 0 auto;\n  margin-top: 10px;\n  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);\n}\n.post-card a{\n  display: block;\n  text-decoration: none;\n  text-align: center;\n}\n\n/* New.js form */\n.form-wrapper {\n  margin: 10px auto;\n  max-width: 500px;\n}\nform {\n    padding: 20px 40px;\n}\nlabel {\n    display: block;\n    fontSize: .9em;\n    color: rgba(0,0,0,.6);\n  padding-bottom: 10px;\n}\nselect {\n  border: 1px solid #ddd;\n  borderRadius: 5px;\n  fontSize: 1em;\n  height: 30px;\n  background-color: #fff;\n}\nselect:focus {\n  outline: none;\n}\n.field {\n  margin-bottom: 10px;\n}\n\ninput {\n  width: 100%;\n  height: 48px;\n  border: 1px solid #ddd;\n  borderRadius: 5px;\n  font-size: 1em;\n  padding: 10px;\n  box-sizing: border-box;\n}\ninput:focus {\n  border: 1px solid #00bcd4;\n  outline: none;\n}\n.actions {\n  text-align: center;\n}\nbutton {\n  width: 120px;\n  height: 36px;\n  border: none;\n  background-color: #ff4081;\n  font-size: 1em;\n  color: #fff;\n  display: inline-block;\n  margin: 20px auto 0;\n  border-radius: 20px;\n}\nbutton:hover {\n    cursor: pointer;\n}\nbutton:focus {\n    outline: none;\n}\n.cancel {\n  display: inline-block;\n  margin-left: 15px;\n  font-size: 1em;\n  color: #00bcd4;\n  opacity: .8;\n  text-decoration: none;\n}\n\n\n/* Home.js */\n\n.new-post {\n   display: block;\n   margin: 30px auto;\n   width: 120px;\n   height: 36px;\n   line-height: 36px;\n   text-align: center;\n   background-color: #ff4081;\n   font-size: 1em;\n   color: #fff;\n   text-decoration: none;\n   border-radius: 20px;\n }\n \n/* Post.js */\n\n.post-wrapper {\n  position: relative;\n  width: 100%;\n  min-height: 200px;\n  max-width: 600px;\n  margin: 30px auto;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 16px;\n  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;\n}\n\n.post-wrapper .title {\n  font-size: 1.3em;\n  padding-top: 10px;\n  padding-bottom: 20px;\n  text-align: center;\n}\n.post-wrapper .content {\n  font-size: 1em;\n  color: rgba(0,0,0,.8);\n}\n", ""]);
+	exports.push([module.id, "*{\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n.header{\n  width: 100%;\n  height: 80%;\n  text-align: center;\n  background-color: #00bcd4;\n  line-height: 80px;\n  font-size: 1.8em;\n}\n.header a{\n  text-decoration: none;\n  color: #fff;\n}\n.post-card{\n  width: 100%;\n  max-width: 600px;\n  margin: 0 auto;\n  margin-top: 10px;\n  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);\n}\n.post-card a{\n  color: #00bcd4;\n  text-decoration: none;\n  text-align: center;\n}\n\n/* New.js form */\n.form-wrapper {\n  margin: 10px auto;\n  max-width: 500px;\n}\nform {\n    padding: 20px 40px;\n}\nlabel {\n    display: block;\n    fontSize: .9em;\n    color: rgba(0,0,0,.6);\n  padding-bottom: 10px;\n}\nselect {\n  border: 1px solid #ddd;\n  borderRadius: 5px;\n  fontSize: 1em;\n  height: 30px;\n  background-color: #fff;\n}\nselect:focus {\n  outline: none;\n}\n.field {\n  margin-bottom: 10px;\n}\n\ninput {\n  width: 100%;\n  height: 48px;\n  border: 1px solid #ddd;\n  borderRadius: 5px;\n  font-size: 1em;\n  padding: 10px;\n  box-sizing: border-box;\n}\ninput:focus {\n  border: 1px solid #00bcd4;\n  outline: none;\n}\n.actions {\n  text-align: center;\n}\nbutton {\n  width: 120px;\n  height: 36px;\n  border: none;\n  background-color: #ff4081;\n  font-size: 1em;\n  color: #fff;\n  display: inline-block;\n  margin: 20px auto 0;\n  border-radius: 20px;\n}\nbutton:hover {\n    cursor: pointer;\n}\nbutton:focus {\n    outline: none;\n}\n.cancel {\n  display: inline-block;\n  margin-left: 15px;\n  font-size: 1em;\n  color: #00bcd4;\n  opacity: .8;\n  text-decoration: none;\n}\n\n\n/* Home.js */\n\n.new-post {\n   display: block;\n   margin: 30px auto;\n   width: 120px;\n   height: 36px;\n   line-height: 36px;\n   text-align: center;\n   background-color: #ff4081;\n   font-size: 1em;\n   color: #fff;\n   text-decoration: none;\n   border-radius: 20px;\n }\n\n/* Post.js */\n\n.post-wrapper {\n  position: relative;\n  width: 100%;\n  min-height: 200px;\n  max-width: 600px;\n  margin: 30px auto;\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 16px;\n  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;\n}\n\n.post-wrapper .title {\n  font-size: 1.3em;\n  padding-top: 10px;\n  padding-bottom: 20px;\n  text-align: center;\n}\n.post-wrapper .content {\n  font-size: 1em;\n  color: rgba(0,0,0,.8);\n}\n", ""]);
 
 	// exports
 
@@ -28864,6 +28896,151 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(179);
+
+	var _axios = __webpack_require__(237);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Edit = function (_Component) {
+	  _inherits(Edit, _Component);
+
+	  function Edit() {
+	    _classCallCheck(this, Edit);
+
+	    var _this = _possibleConstructorReturn(this, (Edit.__proto__ || Object.getPrototypeOf(Edit)).call(this));
+
+	    _this.state = {
+	      work: false,
+	      title: '',
+	      content: ''
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Edit, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      _axios2.default.get('http://localhost:4000/posts/' + this.props.params._id).then(function (res) {
+	        _this2.setState({
+	          title: res.data.post.title,
+	          content: res.data.post.content
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      var _this3 = this;
+
+	      e.preventDefault();
+	      this.setState({ work: true });
+	      var title = this.refs.title.value;
+	      var content = this.refs.content.value;
+	      console.log(title, content);
+	      _axios2.default.put('http://localhost:4000/posts/' + this.props.params._id, { title: title, content: content }).then(function (res) {
+	        return _this3.props.router.push('/');
+	      }).catch(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'bandleChange',
+	    value: function bandleChange(e) {
+	      this.setState({ title: e.target.value });
+	    }
+	  }, {
+	    key: 'bandleChange1',
+	    value: function bandleChange1(e) {
+	      this.setState({ content: e.target.value });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.state);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'form-wrapper' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit.bind(this) },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'field' },
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'label' },
+	              '\u6807\u9898'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', name: 'title', ref: 'title',
+	              value: this.state.title,
+	              onChange: this.bandleChange.bind(this) }),
+	            _react2.default.createElement('br', null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'field' },
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'label' },
+	              '\u5185\u5BB9'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', name: 'content', ref: 'content',
+	              value: this.state.content,
+	              onChange: this.bandleChange1.bind(this) }),
+	            _react2.default.createElement('br', null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'actions' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit', className: 'button', key: '2',
+	                disabled: this.state.work },
+	              '\u66F4\u65B0'
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/', className: 'cancel' },
+	              'no'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Edit;
+	}(_react.Component);
+
+	exports.default = Edit;
 
 /***/ }
 /******/ ]);

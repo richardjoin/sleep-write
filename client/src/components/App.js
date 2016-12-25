@@ -6,7 +6,7 @@ class App extends Component {
   render(){
     return(
       <div>
-      <div><Header /></div>
+        <div><Header /></div>
         <div>
             {this.props.children}
         </div>
