@@ -22,3 +22,120 @@
   margin-top: 10px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }
+.post-card a{
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* New.js form */
+.form-wrapper {
+  margin: 10px auto;
+  max-width: 500px;
+}
+form {
+    padding: 20px 40px;
+}
+label {
+    display: block;
+    fontSize: .9em;
+    color: rgba(0,0,0,.6);
+  padding-bottom: 10px;
+}
+select {
+  border: 1px solid #ddd;
+  borderRadius: 5px;
+  fontSize: 1em;
+  height: 30px;
+  background-color: #fff;
+}
+select:focus {
+  outline: none;
+}
+.field {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #ddd;
+  borderRadius: 5px;
+  font-size: 1em;
+  padding: 10px;
+  box-sizing: border-box;
+}
+input:focus {
+  border: 1px solid #00bcd4;
+  outline: none;
+}
+.actions {
+  text-align: center;
+}
+button {
+  width: 120px;
+  height: 36px;
+  border: none;
+  background-color: #ff4081;
+  font-size: 1em;
+  color: #fff;
+  display: inline-block;
+  margin: 20px auto 0;
+  border-radius: 20px;
+}
+button:hover {
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
+}
+.cancel {
+  display: inline-block;
+  margin-left: 15px;
+  font-size: 1em;
+  color: #00bcd4;
+  opacity: .8;
+  text-decoration: none;
+}
+
+
+/* Home.js */
+
+.new-post {
+   display: block;
+   margin: 30px auto;
+   width: 120px;
+   height: 36px;
+   line-height: 36px;
+   text-align: center;
+   background-color: #ff4081;
+   font-size: 1em;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 20px;
+ }
+ 
+/* Post.js */
+
+.post-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 16px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+
+.post-wrapper .title {
+  font-size: 1.3em;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.post-wrapper .content {
+  font-size: 1em;
+  color: rgba(0,0,0,.8);
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router';
 
 class Home extends Component {
   constructor(){
@@ -12,14 +13,16 @@ class Home extends Component {
     axios.get('http://localhost:4000/posts')
     .then( res => this.setState({data:res.data.posts}))
   }
+
   render(){
     let postList= this.state.data.map( (item,i) => (
       <div key={i} className='post-card'>
-        <h3>{item.title}</h3>
+        <Link to={`/posts/${item._id}`}>{item.title}</Link>
       </div>
     ) )
     return(
       <div>
+      <Link className='new-post' to='/new' >click</Link>
         {postList}
       </div>
     )

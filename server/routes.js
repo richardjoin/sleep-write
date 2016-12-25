@@ -13,10 +13,14 @@ module.exports = function (app) {
     let title =req.body.title;
     let content =req.body.content;
     let post = new Post({title: title,content: content});
-    post.save();
-    res.json(req.body);
+    console.log(req.body);
+    post.save(function () {
+      console.log('no!!!');
+      res.json({ message: '操作成功了！'})
+      // res.status(500).res.json({err:'执行失败了'})
+    });
   })
-  //
+
   app.get('/posts', function (req,res) {
     // exec执行
     // find找
@@ -26,8 +30,10 @@ module.exports = function (app) {
   })
 
   app.get('/posts/:id', function(req, res){
-     res.send('read one post!!!\n');
-   })
+    Post.findById( req.params.id, function (err,post) {
+      res.json({post: post})
+    })
+  })
 
    app.put('/posts/:id', function(req, res){
      res.send('update a post!');
